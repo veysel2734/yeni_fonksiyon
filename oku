@@ -1,1 +1,14 @@
 
+@bot.command()
+async def animals(ctx):
+    await send_random_mem(ctx, 'animals')
+
+async def send_random_mem(ctx, category):
+    img_list = [file for file in os.listdir(f'images/{kategoriler}') if file.endswith(('png', 'jpg', 'jpeg'))]
+    if img_list:
+        img = random.choice(img_list)
+        with open(f'images/{kategoriler}/{img}', 'rb') as f:
+            picture = discord.File(f)
+        await ctx.send(file=picture)
+    else:
+        await ctx.send("Görüntü bulunamadı.")
